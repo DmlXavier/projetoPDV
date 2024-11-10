@@ -18,12 +18,12 @@ def printMainMenu():
     
     return input("Digite o número da opção escolhida: ")
 
-# Mostra o menu de cadastro dos clientes
-def printCustomerMenu():
+# Mostra o menu de cadastro
+def printRegisterMenu(typeOfUser):
         print()
-        print("CADASTRO DE CLIENTES")
+        print(f'CADASTRO DE {typeOfUser.upper()}')
         print()
-        return input('Cadastrar um cliente? (S/N): ').lower()
+        return input(f'Cadastrar um {typeOfUser}? (S/N): ').lower()
 
 # Retorna um dicionário com os dados do usuário cadastrado
 def createUser():
@@ -64,6 +64,8 @@ def addUserToDict(user, dictionary):
             return
 
     dictionary[f'{user["cpf"]}'] = user
-    print('Usuário cadastrado com sucesso!')
+
     print()
+    print('Usuário cadastrado com sucesso!')
+    
     return dictionary
