@@ -7,8 +7,8 @@ while mainSwitch:
 
     match command:
         case "1":
-            entry = functions.printCustomerMenu()
             registerCustomerSwitch = 1
+            entry = functions.printCustomerMenu()
 
             while registerCustomerSwitch:
                 match entry:

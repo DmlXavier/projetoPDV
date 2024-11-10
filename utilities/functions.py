@@ -27,18 +27,16 @@ def printCustomerMenu():
 
 # Retorna um dicionário com os dados do usuário cadastrado
 def createUser():
-    switch = 1
-
-    while switch:
+    while True:
         entry = input("Digite o nome do usuário: ")
         
-        if (entry.isalpha()):
+        if entry.isalpha():
             name = entry
 
-            while switch:
+            while True:
                 entry = input("Digite o cpf do usuário: ")
 
-                if (entry.isdigit() and len(entry) == 11):
+                if entry.isdigit() and len(entry) == 11:
                     cpf = entry
                     user = classes.Person(name, cpf)
                     return user.to_dict()
