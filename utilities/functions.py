@@ -110,3 +110,19 @@ def createProduct():
             print("ERRO! Entrada inválida!")
             print("Nome não pode conter números, caracteres especiais, pontuação ou espaços.")
             print("Exemplo: Produto")
+
+# Adiciona o produto a um dicionário
+def addProductToDict(product, dictionary):
+    for key in dictionary.keys():
+        if product["name"] == key:
+            print()
+            print('ERRO! Produto já cadastrado.')
+
+            return
+    
+    dictionary[f'{product["name"]}'] = product
+
+    print()
+    print('Produto cadastrado com sucesso!')
+
+    return dictionary
