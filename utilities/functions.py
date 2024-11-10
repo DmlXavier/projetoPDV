@@ -25,7 +25,7 @@ def printRegisterMenu(typeOfUser):
         print()
         return input(f'Cadastrar um {typeOfUser}? (S/N): ').lower()
 
-# Retorna um dicionário com os dados do usuário cadastrado
+# Cria um usuário
 def createUser():
     while True:
         entry = input("Digite o nome do usuário: ")
@@ -68,3 +68,45 @@ def addUserToDict(user, dictionary):
     print('Usuário cadastrado com sucesso!')
 
     return dictionary
+
+# Cria um produto
+def createProduct():
+    while True:
+        entry = input('Digite o nome do produto: ')
+
+        if entry.isalpha():
+            name = entry
+
+            while True:
+                entry = input('Digite a quantidade: ')
+                
+                try:
+                    int(entry)
+                except:
+                    print()
+                    print("ERRO! Entrada inválida!")
+                    print("Quantidade não pode conter letras, caracteres especiais, pontuação ou espaços e deve ser um número inteiro.")
+                    print("Exemplo: 5")
+                else:
+                    quantity = entry
+
+                    while True:
+                        entry = input('Digite o preço: ')
+
+                        try:
+                            float(entry)
+                        except:
+                            print()
+                            print("ERRO! Entrada inválida!")
+                            print("Preço não pode conter letras, caracteres especiais ou espaços e deve ser um número decimal ou inteiro.")
+                            print("Exemplo: 5, 5.0")
+                        else:
+                            price = entry
+                            product = classes.Product(name, quantity, price)
+                            
+                            return product.to_dict()                  
+        else:
+            print()
+            print("ERRO! Entrada inválida!")
+            print("Nome não pode conter números, caracteres especiais, pontuação ou espaços.")
+            print("Exemplo: Produto")
