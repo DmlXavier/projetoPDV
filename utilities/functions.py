@@ -54,3 +54,9 @@ def createUser():
             print("Nome não pode conter números, caracteres especiais, pontuação ou espaços.")
             print("Exemplo: NomeSobrenome")
             print()
+            
+# Adiciona um usuário a um dicionário
+def addUserToDict(user, typeOfUser, dictionary):
+    dictionary[f'{typeOfUser}_{len(dictionary) + 1}'] = user
+    
+    return dictionary
