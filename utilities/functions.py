@@ -46,14 +46,12 @@ def createUser():
                     print("ERRO! Entrada inválida!")
                     print("CPF não pode conter letras, caracteres especiais, pontuação ou espaços e deve conter apenas 11 dígitos.")
                     print("Exemplo: 01234567890")
-                    print()
         
         else:
             print()
             print("ERRO! Entrada inválida!")
             print("Nome não pode conter números, caracteres especiais, pontuação ou espaços.")
             print("Exemplo: NomeSobrenome")
-            print()
             
 # Adiciona o usuário a um dicionário
 def addUserToDict(user, dictionary):
@@ -61,11 +59,12 @@ def addUserToDict(user, dictionary):
         if user["cpf"] == key:
             print()
             print('ERRO! Usuário já cadastrado.')
+
             return
 
     dictionary[f'{user["cpf"]}'] = user
-
+    
     print()
     print('Usuário cadastrado com sucesso!')
-    
+
     return dictionary
