@@ -56,7 +56,7 @@ def createUser():
             print()
             
 # Adiciona um usuário a um dicionário
-def addUserToDict(user, typeOfUser, dictionary):
-    dictionary[f'{typeOfUser}_{len(dictionary) + 1}'] = user
-    
+def addUserToDict(user, dictionary):
+    dictionary[f'{user["cpf"]}'] = user
+
     return dictionary

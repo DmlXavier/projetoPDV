@@ -17,7 +17,8 @@ while mainSwitch:
                 match entry:
                     case 's':
                         customer = functions.createUser()
-                        functions.addUserToDict(customer, "cliente", clientes)
+                        functions.addUserToDict(customer, clientes)
+                        print(clientes)
                         
                         entry2 = input("Deseja cadastrar outro cliente? (S/N): ").lower()
 
