@@ -1,7 +1,8 @@
 from . import classes
 
-# Imprime o menu principal
-def printMenu():
+# Mostra o menu principal
+def printMainMenu():
+    print()
     print("MENU PRINCIPAL")
     print()
     print("[1] Cadastrar um cliente")
@@ -12,35 +13,46 @@ def printMenu():
     print("[6] Estoque")
     print("[7] Realizar uma compra")
     print("[8] Relatório de vendas")
+    print("[0] Sair")
     print()
     
     return input("Digite o número da opção escolhida: ")
 
-# Retorna um dicionário com os dados do cliente
-def registerCustomer():
-    switch = True
+# Mostra o menu de cadastro dos clientes
+def printCustomerMenu():
+        print()
+        print("CADASTRO DE CLIENTES")
+        print()
+        return input('Cadastrar um cliente? (S/N): ').lower()
+
+# Retorna um dicionário com os dados do usuário cadastrado
+def createUser():
+    switch = 1
 
     while switch:
-        entry = input("Digite o nome do cliente: ")
+        entry = input("Digite o nome do usuário: ")
         
         if (entry.isalpha()):
             name = entry
 
             while switch:
-                entry = input("Digite o cpf do cliente: ")
+                entry = input("Digite o cpf do usuário: ")
 
-                if(entry.isdigit() and len(entry) == 11):
+                if (entry.isdigit() and len(entry) == 11):
                     cpf = entry
-                    customer = classes.Customer(name, cpf)
-                    
-                    return customer.to_dict()
+                    user = classes.Person(name, cpf)
+                    return user.to_dict()
                 
                 else:
+                    print()
                     print("ERRO! Entrada inválida!")
                     print("CPF não pode conter letras, caracteres especiais, pontuação ou espaços e deve conter apenas 11 dígitos.")
+                    print("Exemplo: 01234567890")
+                    print()
         
         else:
+            print()
             print("ERRO! Entrada inválida!")
-            print("Nome não pode conter números, caracteres especiais, pontuação ou espaços. Tente novamente.")
-
-
+            print("Nome não pode conter números, caracteres especiais, pontuação ou espaços.")
+            print("Exemplo: NomeSobrenome")
+            print()

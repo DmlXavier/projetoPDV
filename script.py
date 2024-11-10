@@ -1,7 +1,39 @@
 from utilities import functions
 
-command = functions.printMenu()
+mainSwitch = 1
 
-if (command == "1"):
-    client = functions.registerCustomer()
-    print(client)
+while mainSwitch:
+    command = functions.printMainMenu()
+
+    match command:
+        case "1":
+            entry = functions.printCustomerMenu()
+            registerCustomerSwitch = 1
+
+            while registerCustomerSwitch:
+                match entry:
+                    case 's':
+                        customer = functions.createUser()
+                        
+                        entry2 = input("Deseja cadastrar outro cliente? (S/N): ").lower()
+
+                        match entry2:
+                            case 's':
+                                entry = entry2
+                            
+                            case 'n':
+                                registerCustomerSwitch = 0
+                            
+                            case _:
+                                print()
+                                print('ERRO! Comando inválido. Voltando ao menu de cadastro.')
+                                command = '1'
+                    
+                    case 'n':
+                        registerCustomerSwitch = 0
+                    
+                    case _:
+                        print()
+                        print('ERRO! Comando inválido. Tente novamente.')
+
+                        command = '1'
