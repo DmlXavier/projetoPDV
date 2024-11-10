@@ -1,5 +1,8 @@
 from utilities import functions
 
+clientes = {}
+vendedores = {}
+produtos = {}
 mainSwitch = 1
 
 while mainSwitch:
@@ -14,6 +17,7 @@ while mainSwitch:
                 match entry:
                     case 's':
                         customer = functions.createUser()
+                        functions.addUserToDict(customer, "cliente", clientes)
                         
                         entry2 = input("Deseja cadastrar outro cliente? (S/N): ").lower()
 
