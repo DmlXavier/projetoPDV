@@ -55,8 +55,15 @@ def createUser():
             print("Exemplo: NomeSobrenome")
             print()
             
-# Adiciona um usuário a um dicionário
+# Adiciona o usuário a um dicionário
 def addUserToDict(user, dictionary):
-    dictionary[f'{user["cpf"]}'] = user
+    for key in dictionary.keys():
+        if user["cpf"] == key:
+            print()
+            print('ERRO! Usuário já cadastrado.')
+            return
 
+    dictionary[f'{user["cpf"]}'] = user
+    print('Usuário cadastrado com sucesso!')
+    print()
     return dictionary
