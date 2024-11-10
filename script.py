@@ -1,8 +1,8 @@
 from utilities import functions
 
-clientes = {}
-vendedores = {}
-produtos = {}
+clients = {}
+salespeople = {}
+products = {}
 mainSwitch = 1
 
 while mainSwitch:
@@ -10,16 +10,13 @@ while mainSwitch:
 
     match command:
         case "1":
-            registerCustomerSwitch = 1
-            entry = functions.printCustomerMenu()
+            switch = 1
+            entry = functions.printRegisterMenu('cliente')
 
-            while registerCustomerSwitch:
+            while switch:
                 match entry:
                     case 's':
-                        customer = functions.createUser()
-                        functions.addUserToDict(customer, clientes)
-                        print(clientes)
-                        
+                        functions.addUserToDict(functions.createUser(), clients)
                         entry2 = input("Deseja cadastrar outro cliente? (S/N): ").lower()
 
                         match entry2:
@@ -27,7 +24,7 @@ while mainSwitch:
                                 entry = entry2
                             
                             case 'n':
-                                registerCustomerSwitch = 0
+                                switch = 0
                             
                             case _:
                                 print()
@@ -35,7 +32,38 @@ while mainSwitch:
                                 command = '1'
                     
                     case 'n':
-                        registerCustomerSwitch = 0
+                        switch = 0
+                    
+                    case _:
+                        print()
+                        print('ERRO! Comando inválido. Tente novamente.')
+
+                        command = '1'
+        
+        case '2':
+            switch = 1
+            entry = functions.printRegisterMenu('vendedor')
+
+            while switch:
+                match entry:
+                    case 's':
+                        functions.addUserToDict(functions.createUser(), salespeople)
+                        entry2 = input("Deseja cadastrar outro vendedor? (S/N): ").lower()
+
+                        match entry2:
+                            case 's':
+                                entry = entry2
+                            
+                            case 'n':
+                                switch = 0
+                            
+                            case _:
+                                print()
+                                print('ERRO! Comando inválido. Voltando ao menu de cadastro.')
+                                command = '1'
+                    
+                    case 'n':
+                        switch = 0
                     
                     case _:
                         print()
