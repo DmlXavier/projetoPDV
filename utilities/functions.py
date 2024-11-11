@@ -69,6 +69,16 @@ def addUserToDict(user, dictionary):
 
     return dictionary
 
+# Verifica se o input é válido (int e float)
+def getValidInput(entry, inputType):
+    try:
+        if inputType == 'int':
+            return int(entry)
+        elif inputType == 'float':
+            return float(entry)
+    except ValueError:
+        return False
+
 # Coleta as informações do produto a ser cadastrado
 def collectProductInfo():
     while True:
@@ -79,32 +89,28 @@ def collectProductInfo():
 
             while True:
                 entry = input('Digite a quantidade: ').strip()
+                quantity = getValidInput(entry, 'int')
                 
-                try:
-                    int(entry)
-                except ValueError:
+                if quantity:
+                    while True:
+                        entry = input('Digite o preço: ').strip()
+                        price = getValidInput(entry, 'float')
+
+                        if price:
+                            price = round(price, 2)
+                            product = classes.Product(name, quantity, price)
+                            
+                            return product.to_dict()    
+                        else:
+                            print()
+                            print("ERRO! Entrada inválida!")
+                            print("Preço não pode conter letras, caracteres especiais ou espaços e deve ser um número decimal ou inteiro.")
+                            print("Exemplo: 5.00")             
+                else:
                     print()
                     print("ERRO! Entrada inválida!")
                     print("Quantidade não pode conter letras, caracteres especiais, pontuação ou espaços e deve ser um número inteiro.")
                     print("Exemplo: 5")
-                else:
-                    quantity = int(entry)
-
-                    while True:
-                        entry = input('Digite o preço: ').strip()
-
-                        try:
-                            float(entry)
-                        except ValueError:
-                            print()
-                            print("ERRO! Entrada inválida!")
-                            print("Preço não pode conter letras, caracteres especiais ou espaços e deve ser um número decimal ou inteiro.")
-                            print("Exemplo: 5.00")
-                        else:
-                            price = round(float(entry), 2)
-                            product = classes.Product(name, quantity, price)
-                            
-                            return product.to_dict()
         else:
             print()
             print("ERRO! Entrada inválida!")
