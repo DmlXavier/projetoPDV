@@ -30,8 +30,8 @@ def collectUserInfo():
     while True:
         entry = input("Digite o nome do usuário: ").strip()
         
-        if entry.isalpha():
-            name = entry
+        if entry.replace(' ', '').isalpha():
+            name = entry.title()
 
             while True:
                 entry = input("Digite o cpf do usuário: ").strip()
@@ -51,7 +51,7 @@ def collectUserInfo():
             print()
             print("ERRO! Entrada inválida!")
             print("Nome não pode conter números, caracteres especiais, pontuação ou espaços.")
-            print("Exemplo: NomeSobrenome")
+            print("Exemplo: Nome Sobrenome")
             
 # Adiciona o usuário a um dicionário
 def addUserToDict(user, dictionary):
@@ -84,7 +84,7 @@ def collectProductInfo():
     while True:
         entry = input('Digite o nome do produto: ').strip()
 
-        if entry.isalpha():
+        if entry.replace(' ', '').isalpha():
             name = entry
 
             while True:
@@ -92,20 +92,32 @@ def collectProductInfo():
                 quantity = getValidInput(entry, 'int')
                 
                 if quantity:
-                    while True:
-                        entry = input('Digite o preço: ').strip()
-                        price = getValidInput(entry, 'float')
+                    if quantity > 0:
+                        while True:
+                            entry = input('Digite o preço: ').strip()
+                            price = getValidInput(entry, 'float')
 
-                        if price:
-                            price = round(price, 2)
-                            product = classes.Product(name, quantity, price)
-                            
-                            return product.to_dict()    
-                        else:
-                            print()
-                            print("ERRO! Entrada inválida!")
-                            print("Preço não pode conter letras, caracteres especiais ou espaços e deve ser um número decimal ou inteiro.")
-                            print("Exemplo: 5.00")             
+                            if price:
+                                if price > 0:
+                                    price = round(price, 2)
+                                    product = classes.Product(name, quantity, price)
+                                    
+                                    return product.to_dict()
+                                else:
+                                    print()
+                                    print("ERRO! Entrada inválida!")
+                                    print("Preço não pode ser menor ou igual a zero.")
+                                    print("Exemplo: 5.00")
+                            else:
+                                print()
+                                print("ERRO! Entrada inválida!")
+                                print("Preço não pode conter letras, caracteres especiais ou espaços e deve ser um número decimal, com até duas casas decimais.")
+                                print("Exemplo: 5.00")
+                    else:
+                        print()
+                        print("ERRO! Entrada inválida!")
+                        print("Quantidade não pode ser menor ou igual a zero.")
+                        print("Exemplo: 5") 
                 else:
                     print()
                     print("ERRO! Entrada inválida!")
@@ -114,8 +126,8 @@ def collectProductInfo():
         else:
             print()
             print("ERRO! Entrada inválida!")
-            print("Nome não pode conter números, caracteres especiais, pontuação ou espaços.")
-            print("Exemplo: Produto")
+            print("Nome não pode conter números, caracteres especiais, pontuação.")
+            print("Exemplo: Novo produto")
 
 # Adiciona o produto a um dicionário
 def addProductToDict(product, dictionary):
