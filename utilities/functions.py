@@ -16,25 +16,25 @@ def printMainMenu():
     print("[0] Sair")
     print()
     
-    return input("Digite o número da opção escolhida: ")
+    return input("Digite o número da opção escolhida: ").strip()
 
 # Mostra o menu de cadastro
 def printRegisterMenu(typeOfUser):
         print()
         print(f'CADASTRO DE {typeOfUser.upper()}')
         print()
-        return input(f'Cadastrar um {typeOfUser}? (S/N): ').lower()
+        return input(f'Cadastrar um {typeOfUser}? (S/N): ').lower().strip()
 
-# Cria um usuário
-def createUser():
+# Coleta as informações do usuário a ser cadastrado
+def collectUserInfo():
     while True:
-        entry = input("Digite o nome do usuário: ")
+        entry = input("Digite o nome do usuário: ").strip()
         
         if entry.isalpha():
             name = entry
 
             while True:
-                entry = input("Digite o cpf do usuário: ")
+                entry = input("Digite o cpf do usuário: ").strip()
 
                 if entry.isdigit() and len(entry) == 11:
                     cpf = entry
@@ -69,42 +69,42 @@ def addUserToDict(user, dictionary):
 
     return dictionary
 
-# Cria um produto
-def createProduct():
+# Coleta as informações do produto a ser cadastrado
+def collectProductInfo():
     while True:
-        entry = input('Digite o nome do produto: ')
+        entry = input('Digite o nome do produto: ').strip()
 
         if entry.isalpha():
             name = entry
 
             while True:
-                entry = input('Digite a quantidade: ')
+                entry = input('Digite a quantidade: ').strip()
                 
                 try:
                     int(entry)
-                except:
+                except ValueError:
                     print()
                     print("ERRO! Entrada inválida!")
                     print("Quantidade não pode conter letras, caracteres especiais, pontuação ou espaços e deve ser um número inteiro.")
                     print("Exemplo: 5")
                 else:
-                    quantity = entry
+                    quantity = int(entry)
 
                     while True:
-                        entry = input('Digite o preço: ')
+                        entry = input('Digite o preço: ').strip()
 
                         try:
                             float(entry)
-                        except:
+                        except ValueError:
                             print()
                             print("ERRO! Entrada inválida!")
                             print("Preço não pode conter letras, caracteres especiais ou espaços e deve ser um número decimal ou inteiro.")
-                            print("Exemplo: 5, 5.0")
+                            print("Exemplo: 5.00")
                         else:
-                            price = entry
+                            price = round(float(entry), 2)
                             product = classes.Product(name, quantity, price)
                             
-                            return product.to_dict()                  
+                            return product.to_dict()
         else:
             print()
             print("ERRO! Entrada inválida!")
