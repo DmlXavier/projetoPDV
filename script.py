@@ -23,9 +23,12 @@ while True:
                                 userList = clients
                             case 'vendedor':
                                 userList = salespeople
+                            case None:
+                                selectedUser = 0
                         
                         if entry == functions.isExitInput(entry):
                             selectedUser = functions.selectUserType()
+                            break
                         else:
                             user = functions.collectUserInfo(entry)
 
@@ -46,6 +49,7 @@ while True:
                                         break
                             else:
                                 selectedUser = functions.selectUserType()
+                                break
                 else:
                     break
         

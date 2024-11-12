@@ -25,6 +25,7 @@ def printRegisterMenu(item):
         print()
         return input(f'Digite o nome do {item}: ').strip()
 
+# Menu de cadastro do usuário
 def selectUserType():
     def printUserMenu():
         print()
