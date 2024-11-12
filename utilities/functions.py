@@ -32,36 +32,65 @@ def isExitInput(entry):
 
 # Coleta as informações do usuário a ser cadastrado
 def collectUserInfo():
+    # Valida a entrada do nome do usuário
+    def validateUserName(entry):
+        if entry.replace(' ', '').isalpha():
+            return entry.title()
+        elif entry == '':
+            print()
+            print("ERRO! Entrada inválida!")
+            print("O campo não pode estar vazio.")
+            print("Exemplo: Nome Sobrenome")
+            
+            return
+        else:
+            print()
+            print("ERRO! Entrada inválida!")
+            print("Nome não pode conter números, caracteres especiais ou pontuação.")
+            print("Exemplo: Nome Sobrenome")
+            
+            return
+        
+    # Valida a entrada do CPF do usuário
+    def validateCpf(entry):
+        if entry.isdigit() and len(entry) == 11:
+            return entry
+        elif entry == '':
+            print()
+            print("ERRO! Entrada inválida!")
+            print("O campo não pode estar vazio.")
+            print("Exemplo: 01234567890")
+            
+            return
+        else:
+            print()
+            print("ERRO! Entrada inválida!")
+            print("CPF não pode conter letras, caracteres especiais, pontuação ou espaços e deve conter apenas 11 dígitos.")
+            print("Exemplo: 01234567890")
+            
+            return
+
     while True:
         entry = input("Digite o nome do usuário: ").strip()
         
         if isExitInput(entry):
             return
         else:
-            if entry.replace(' ', '').isalpha():
-                name = entry.title()
+            name = validateUserName(entry)
 
+            if name:
                 while True:
                     entry = input("Digite o cpf do usuário: ").strip()
                    
                     if isExitInput(entry):
                         return
                     else:
-                        if entry.isdigit() and len(entry) == 11:
-                            cpf = entry
+                        cpf = validateCpf(entry)
+
+                        if cpf:
                             user = classes.Person(name, cpf)
                             return user.to_dict()
-                        else:
-                            print()
-                            print("ERRO! Entrada inválida!")
-                            print("CPF não pode conter letras, caracteres especiais, pontuação ou espaços e deve conter apenas 11 dígitos.")
-                            print("Exemplo: 01234567890")
-            else:
-                print()
-                print("ERRO! Entrada inválida!")
-                print("Nome não pode conter números, caracteres especiais, pontuação ou espaços.")
-                print("Exemplo: Nome Sobrenome")
-            
+
 # Adiciona o usuário a um dicionário
 def addUserToDict(user, dictionary):
     for key in dictionary.keys():
@@ -78,77 +107,125 @@ def addUserToDict(user, dictionary):
 
     return dictionary
 
-# Verifica se o input é válido (int e float)
-def getValidInput(entry, inputType):
-    try:
-        if inputType == 'int':
-            return int(entry)
-        elif inputType == 'float':
-            return float(entry)
-    except ValueError:
-        return
-
 # Coleta as informações do produto a ser cadastrado
 def collectProductInfo():
+    # Converte uma string (se possível) em int ou float
+    def parseNumber(entry, numberType):
+        try:
+            if numberType == 'int':
+                return int(entry)
+            elif numberType == 'float':
+                return float(entry)
+        except ValueError:
+            return
+    
+    # Valida a entrada do nome do produto
+    def validateProductName(entry):
+        if entry.replace(' ', '').isalpha():
+            return entry.capitalize()
+        elif entry == '':
+            print()
+            print("ERRO! Entrada inválida!")
+            print("O campo não pode estar vazio.")
+            print("Exemplo: Novo produto")
+            
+            return
+        else:
+            print()
+            print("ERRO! Entrada inválida!")
+            print("Nome não pode conter números, caracteres especiais ou pontuação.")
+            print("Exemplo: Novo produto")
+            
+            return
+    
+    # Valida a entrada da quantidade do produto
+    def validateProductQuantity(entry):
+        entry = parseNumber(entry, 'int')
+
+        if entry:
+            if entry > 0:
+                return entry
+            else:
+                print()
+                print("ERRO! Entrada inválida!")
+                print("Quantidade não pode ser menor ou igual a zero.")
+                print("Exemplo: 5")
+
+                return
+        elif entry == '':
+            print()
+            print("ERRO! Entrada inválida!")
+            print("O campo não pode estar vazio.")
+            print("Exemplo: 5")
+            
+            return
+        else:
+            print()
+            print("ERRO! Entrada inválida!")
+            print("Quantidade não pode conter letras, caracteres especiais, pontuação ou espaços e deve ser um número inteiro.")
+            print("Exemplo: 5")
+
+            return
+    
+    # Valida a entrada do preço do produto
+    def validateProductPrice(entry):
+        entry = parseNumber(entry, 'float')
+
+        if entry:
+            if entry > 0:
+                return round(entry, 2)
+            else:
+                print()
+                print("ERRO! Entrada inválida!")
+                print("Preço não pode ser menor ou igual a zero.")
+                print("Exemplo: 5.00")
+
+                return
+        elif entry == '':
+            print()
+            print("ERRO! Entrada inválida!")
+            print("O campo não pode estar vazio.")
+            print("Exemplo: 5.50")
+            
+            return
+        else:
+            print()
+            print("ERRO! Entrada inválida!")
+            print("Preço não pode conter letras, caracteres especiais ou espaços e deve ser um número decimal, com até duas casas decimais.")
+            print("Exemplo: 5.50")
+
+            return
+
     while True:
         entry = input('Digite o nome do produto: ').strip()
 
         if isExitInput(entry):
             return
         else:
-            if entry.replace(' ', '').isalpha():
-                name = entry.capitalize()
+            name = validateProductName(entry)
 
+            if name:
                 while True:
                     entry = input('Digite a quantidade: ').strip()
-                    
+                        
                     if isExitInput(entry):
                         return
                     else:
-                        quantity = getValidInput(entry, 'int')
-                    
+                        quantity = validateProductQuantity(entry)
+                            
                         if quantity:
-                            if quantity > 0:
-                                while True:
-                                    entry = input('Digite o preço: ').strip()
-                                    
-                                    if isExitInput(entry):
-                                        return
-                                    else:
-                                        price = getValidInput(entry, 'float')
-
-                                        if price:
-                                            if price > 0:
-                                                price = round(price, 2)
-                                                product = classes.Product(name, quantity, price)
+                            while True:
+                                entry = input('Digite o preço: ').strip()
                                                 
-                                                return product.to_dict()
-                                            else:
-                                                print()
-                                                print("ERRO! Entrada inválida!")
-                                                print("Preço não pode ser menor ou igual a zero.")
-                                                print("Exemplo: 5.00")
-                                        else:
-                                            print()
-                                            print("ERRO! Entrada inválida!")
-                                            print("Preço não pode conter letras, caracteres especiais ou espaços e deve ser um número decimal, com até duas casas decimais.")
-                                            print("Exemplo: 5.00")
-                            else:
-                                print()
-                                print("ERRO! Entrada inválida!")
-                                print("Quantidade não pode ser menor ou igual a zero.")
-                                print("Exemplo: 5") 
-                        else:
-                            print()
-                            print("ERRO! Entrada inválida!")
-                            print("Quantidade não pode conter letras, caracteres especiais, pontuação ou espaços e deve ser um número inteiro.")
-                            print("Exemplo: 5")
-            else:
-                print()
-                print("ERRO! Entrada inválida!")
-                print("Nome não pode conter números, caracteres especiais, pontuação.")
-                print("Exemplo: Novo produto")
+                                if isExitInput(entry):
+                                    return
+                                else:
+                                    price = validateProductPrice(entry)
 
+                                    if price:
+                                        product = classes.Product(name, quantity, price)    
+                                        return product.to_dict()
+                                        
 # Adiciona o produto a um dicionário
 def addProductToDict(product, dictionary):
     for key in dictionary.keys():
