@@ -5,33 +5,58 @@ def printMainMenu():
     print()
     print("MENU PRINCIPAL")
     print()
-    print("[1] Cadastrar um cliente")
-    print("[2] Cadastrar um vendedor")
-    print("[3] Cadastrar um produto")
-    print("[4] Lista de clientes cadastrados")
-    print("[5] Lista de vendedores")
-    print("[6] Estoque")
-    print("[7] Realizar uma compra")
-    print("[8] Relatório de vendas")
+    print("[1] Cadastrar um usuário")
+    print("[2] Cadastrar um produto")
+    print("[3] Lista de clientes cadastrados")
+    print("[4] Lista de vendedores")
+    print("[5] Estoque")
+    print("[6] Realizar uma compra")
+    print("[7] Relatório de vendas")
     print("[0] Sair")
     print()
     
     return input("Digite o número da opção escolhida: ").strip()
 
 # Mostra o menu de cadastro
-def printRegisterMenu(typeOfUser):
+def printRegisterMenu(item):
         print()
-        print(f'CADASTRO DE {typeOfUser.upper()}')
-        print('Digite "sair" para voltar ao menu principal')
+        print(f'CADASTRO DE {item.upper()}')
+        print('Digite "voltar" para voltar.')
         print()
-        return input(f'Cadastrar um {typeOfUser}? (S/N): ').lower().strip()
+        return input(f'Digite o nome do {item}: ').strip()
+
+def selectUserType():
+    def printUserMenu():
+        print()
+        print("CADASTRO DE USUÁRIO")
+        print()
+        print("[1] Cadastrar um cliente")
+        print("[2] Cadastrar um vendedor")
+        print("[3] Voltar ao menu principal")
+        print()
+
+        return input("Digite o número da opção escolhida: ").strip()
+    
+    while True:
+        command = printUserMenu()
+
+        match command:
+            case '1':
+                return 'cliente'
+            case '2':
+                return 'vendedor'
+            case '3':
+                return
+            case _:
+                print()
+                print('ERRO! Comando inválido. Tente novamente.')
 
 # Retorna True se o input for "sair"
 def isExitInput(entry):
-    return entry.lower() == 'sair'
+    return entry.lower() == 'voltar'
 
 # Coleta as informações do usuário a ser cadastrado
-def collectUserInfo():
+def collectUserInfo(entry):
     # Valida a entrada do nome do usuário
     def validateUserName(entry):
         if entry.replace(' ', '').isalpha():
@@ -71,8 +96,6 @@ def collectUserInfo():
             return
 
     while True:
-        entry = input("Digite o nome do usuário: ").strip()
-        
         if isExitInput(entry):
             return
         else:
