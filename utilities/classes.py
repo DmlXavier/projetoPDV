@@ -15,4 +15,4 @@ class Product:
         self.productPrice = price
     
     def to_dict(self):
-        return {'name': self.productName, 'quantity': str(self.productQuantity), 'price': f'R${self.productPrice:.2f}'}
+        return {'name': self.productName, 'quantity': self.productQuantity, 'price': self.productPrice}

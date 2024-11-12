@@ -19,19 +19,24 @@ while mainSwitch:
                 match entry:
                     case 's':
                         client = functions.collectUserInfo()
-                        functions.addUserToDict(client, clients)
-                        entry2 = input("Deseja cadastrar outro cliente? (S/N): ").lower().strip()
 
-                        match entry2:
-                            case 's':
-                                entry = entry2
-                            case 'n':
-                                switch = 0
-                            case _:
-                                print()
-                                print('ERRO! Comando inválido. Voltando ao menu de cadastro.')
-                                entry = functions.printRegisterMenu('cliente')
-                    case 'n':
+                        if client:
+                            functions.addUserToDict(client, clients)
+                            new_entry = input("Deseja cadastrar outro cliente? (S/N): ").lower().strip()
+
+                            match new_entry:
+                                case 's':
+                                    entry = new_entry
+                                case 'n':
+                                    switch = 0
+                                case _:
+                                    print()
+                                    print('ERRO! Comando inválido. Voltando ao menu de cadastro.')
+                                    entry = functions.printRegisterMenu('cliente')
+                        else:
+                            switch = 0
+
+                    case 'n' | _ if functions.isExitInput(entry):
                         switch = 0
                     case _:
                         print()
@@ -47,19 +52,24 @@ while mainSwitch:
                 match entry:
                     case 's':
                         salesperson = functions.collectUserInfo()
-                        functions.addUserToDict(salesperson, salespeople)
-                        entry2 = input("Deseja cadastrar outro vendedor? (S/N): ").lower().strip()
+                        
+                        if salesperson:
+                            functions.addUserToDict(salesperson, salespeople)
+                            new_entry = input("Deseja cadastrar outro vendedor? (S/N): ").lower().strip()
 
-                        match entry2:
-                            case 's':
-                                entry = entry2
-                            case 'n':
-                                switch = 0
-                            case _:
-                                print()
-                                print('ERRO! Comando inválido. Voltando ao menu de cadastro.')
-                                entry = functions.printRegisterMenu('vendedor')
-                    case 'n':
+                            match new_entry:
+                                case 's':
+                                    entry = new_entry
+                                case 'n':
+                                    switch = 0
+                                case _:
+                                    print()
+                                    print('ERRO! Comando inválido. Voltando ao menu de cadastro.')
+                                    entry = functions.printRegisterMenu('vendedor')
+                        else:
+                            switch = 0
+
+                    case 'n' | _ if functions.isExitInput(entry):
                         switch = 0
                     case _:
                         print()
@@ -75,19 +85,24 @@ while mainSwitch:
                 match entry:
                     case 's':
                         product = functions.collectProductInfo()
-                        functions.addProductToDict(product, products)
-                        entry2 = input("Deseja cadastrar outro produto? (S/N): ").lower().strip()
+                        
+                        if product:
+                            functions.addProductToDict(product, products)
+                            new_entry = input("Deseja cadastrar outro produto? (S/N): ").lower().strip()
 
-                        match entry2:
-                            case 's':
-                                entry = entry2
-                            case 'n':
-                                switch = 0
-                            case _:
-                                print()
-                                print('ERRO! Comando inválido. Voltando ao menu de cadastro.')
-                                entry = functions.printRegisterMenu('produto')
-                    case 'n':
+                            match new_entry:
+                                case 's':
+                                    entry = new_entry
+                                case 'n':
+                                    switch = 0
+                                case _:
+                                    print()
+                                    print('ERRO! Comando inválido. Voltando ao menu de cadastro.')
+                                    entry = functions.printRegisterMenu('produto')
+                        else:
+                            switch = 0
+                            
+                    case 'n' | _ if functions.isExitInput(entry):
                         switch = 0
                     case _:
                         print()
