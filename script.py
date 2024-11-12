@@ -35,13 +35,13 @@ while mainSwitch:
                                     entry = functions.printRegisterMenu('cliente')
                         else:
                             switch = 0
-
-                    case 'n' | _ if functions.isExitInput(entry):
-                        switch = 0
                     case _:
-                        print()
-                        print('ERRO! Comando inválido. Tente novamente.')
-                        entry = input('Cadastrar um cliente? (S/N): ').lower().strip()
+                        if entry == 'n' or functions.isExitInput(entry):
+                            switch = 0
+                        else:
+                            print()
+                            print('ERRO! Comando inválido. Tente novamente.')
+                            entry = input('Cadastrar um cliente? (S/N): ').lower().strip()
         
         # Cadastrar um vendedor
         case '2':
@@ -68,13 +68,13 @@ while mainSwitch:
                                     entry = functions.printRegisterMenu('vendedor')
                         else:
                             switch = 0
-
-                    case 'n' | _ if functions.isExitInput(entry):
-                        switch = 0
                     case _:
-                        print()
-                        print('ERRO! Comando inválido. Tente novamente.')
-                        entry = input('Cadastrar um vendedor? (S/N): ').lower().strip()
+                        if entry == 'n' or functions.isExitInput(entry):
+                            switch = 0
+                        else:
+                            print()
+                            print('ERRO! Comando inválido. Tente novamente.')
+                            entry = input('Cadastrar um vendedor? (S/N): ').lower().strip()
         
         # Cadastrar um produto
         case '3':
@@ -101,10 +101,10 @@ while mainSwitch:
                                     entry = functions.printRegisterMenu('produto')
                         else:
                             switch = 0
-                            
-                    case 'n' | _ if functions.isExitInput(entry):
-                        switch = 0
                     case _:
-                        print()
-                        print('ERRO! Comando inválido. Tente novamente.')
-                        entry = input('Cadastrar um produto? (S/N): ').lower().strip()
+                        if entry == 'n' or functions.isExitInput(entry):
+                            switch = 0
+                        else:
+                            print()
+                            print('ERRO! Comando inválido. Tente novamente.')
+                            entry = input('Cadastrar um produto? (S/N): ').lower().strip()
