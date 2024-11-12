@@ -10,7 +10,7 @@ Este projeto faz parte da segunda avaliação da disciplina de Introdução à p
 - Diego Lucas de Melo Lima Xavier
 - Vitoria Damascena
 - Luanny
-- Ana Clara Vasconcelos
+- Ana Clara Vasconcelos dos Santos
 
 ## Objetivos
 
